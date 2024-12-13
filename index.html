@@ -1,113 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Engineering & Systems - Courier Portal</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"></script>
-    <style>
-        /* Add CSS styling for better appearance */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #2C3E50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .logo {
-            width: 150px;
-        }
-        h1 {
-            margin: 10px 0;
-        }
-        #login-section, #home-section {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courier Management Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    form label {
+      display: block;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="https://www.selectengg.com/assets/images/logo.png" alt="Select Engineering & Systems Logo" class="logo">
-        <h1>Courier Portal</h1>
-    </header>
+  <h1>Courier Management Dashboard</h1>
+  
+  <!-- Form to Add Courier Entry -->
+  <form id="courierForm">
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
     
-    <main>
-        <section id="login-section">
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="user-id">User ID:</label>
-                <input type="text" id="user-id" required>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" required>
-
-                <button type="submit">Login</button>
-            </form>
-        </section>
-
-        <section id="home-section" style="display: none;">
-            <h2>Welcome to Courier Portal</h2>
-            <p>You have successfully logged in!</p>
-        </section>
-    </main>
-
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
-            const userId = document.getElementById('user-id').value;
-            const password = document.getElementById('password').value;
-
-            // Check credentials
-            if ((userId === 'admin' || userId === 'support') && password === '123456') {
-                // Hide login section and show dashboard
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('home-section').style.display = 'block';
-            } else {
-                alert('Invalid User ID or Password');
-            }
-        });
-    </script>
+    <label for="sender">Sender Name:</label>
+    <input type="text" id="sender" required>
+    
+    <label for="receiver">Receiver Name:</label>
+    <input type="text" id="receiver" required>
+    
+    <label for="itemDescription">Item Description:</label>
+    <textarea id="itemDescription" rows="2" required></textarea>
+    
+    <label for="courierPartner">Courier Partner Name:</label>
+    <input type="text" id="courierPartner" required>
+    
+    <label for="trackingNo">AWB/Tracking No:</label>
+    <input type="text" id="trackingNo" required>
+    
+    <label for="handoverBy">Handover By:</label>
+    <input type="text" id="handoverBy" required>
+    
+    <label for="remarks">Remarks:</label>
+    <textarea id="remarks" rows="2"></textarea>
+    
+    <button type="submit">Save and Submit</button>
+  </form>
+  
+  <!-- Table to View Courier Entries -->
+  <h2>Courier Entries</h2>
+  <table id="entriesTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sender Name</th>
+        <th>Receiver Name</th>
+        <th>Item Description</th>
+        <th>Courier Partner</th>
+        <th>AWB/Tracking No</th>
+        <th>Handover By</th>
+        <th>Remarks</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dynamic rows will be added here -->
+    </tbody>
+  </table>
+  
+  <script src="script.js"></script>
 </body>
 </html>
